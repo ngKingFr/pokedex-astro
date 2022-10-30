@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/layout.astro';
+import type { Pokemon } from '../models/pokemon';
+import {getPokemonById, getAllPokemon} from '../services/pokedex';
+export async function getStaticPaths() {
+  const list = await getAllPokemon();
+  return list.map(p => ({ params: { id: +p.id } }));
+}
+const { id } = Astro.params;
+
+const pokemon: Pokemon = await getPokemonById(+id);
+---
+
+<Layout title={id}>
+	<main>
+		<div className="text-center w-screen">
+			{pokemon.name.french} - {pokemon.type} - {pokemon.base.Attack}
+		<div/>
+	</main>
+</Layout>
+
+<style>
+</style>

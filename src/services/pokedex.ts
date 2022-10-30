@@ -7,3 +7,10 @@ export const getAllPokemon: () => Promise<Pokemon[]> = async () => {
         return result as Pokemon[];
     })
 }
+
+
+export const getPokemonById: (id: number) => Promise<Pokemon> = async (id: number) => {
+    return await getAllPokemon().then((pokemons) => {
+        return pokemons[pokemons.findIndex(p => p.id === id)]
+    })
+}
