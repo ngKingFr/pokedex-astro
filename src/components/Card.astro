@@ -1,21 +1,28 @@
 ---
+import {Pokemon} from '../models/pokemon';
+import { Image } from '@astrojs/image/components';
+
 export interface Props {
 	title: string;
-	body: string;
+	pokemon: Pokemon;
 	href: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, pokemon } = Astro.props;
+
+const imgSrc = `${'https://raw.githubusercontent.com/ruizalexandre/pokedex/master/images/' + (pokemon.id <= 9 ? '00' + pokemon.id : (pokemon.id <= 99) ? '0' + pokemon.id : pokemon.id) + '.png'}`
 ---
 
 <li class="link-card">
 	<a href={href}>
 		<h2>
 			{title}
-			<span>&rarr;</span>
 		</h2>
+		 {
+		   imgSrc && <Image format="png" alt={pokemon.name.french} width='200' height='200' src={imgSrc} decoding='async' loading='lazy'  />
+		 }
 		<p>
-			{body}
+			Type: {pokemon.type}
 		</p>
 	</a>
 </li>
