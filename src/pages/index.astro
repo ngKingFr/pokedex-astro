@@ -8,12 +8,13 @@ const pokemons = await getAllPokemon();
 ---
 
 <Layout title="Welcome to Astro.">
-	<main>
+	<main class="m-auto p-6">
+	    <input placeholder='rechercher un pokemon' name='search-pokemon' />
 		<ul role="list" class="link-card-grid">
 		  {pokemons &&
 		    pokemons.map((pokemon) => (
 		    <Card
-                href={`/${pokemon.id}`}
+                href={`/pokemon/${pokemon.id}`}
                 title={`${pokemon.name.french}`}
                 pokemon={pokemon}
             />
@@ -25,8 +26,6 @@ const pokemons = await getAllPokemon();
 
 <style>
 	main {
-		margin: auto;
-		padding: 1.5rem;
 		max-width: 60ch;
 	}
 	h1 {
