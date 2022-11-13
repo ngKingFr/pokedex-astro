@@ -12,3 +12,8 @@ export const getPokemonById: (id: number) => Promise<Pokemon> = async (id: numbe
         return pokemons[pokemons.findIndex(p => p.id === id)]
     });
 }
+
+
+export const getImgPokemon: (id: number) => string = (id: number) => {
+    return `${'https://raw.githubusercontent.com/ruizalexandre/pokedex/master/images/' + (id <= 9 ? '00' + id : (id <= 99) ? '0' + id : id) + '.png'}`
+}
